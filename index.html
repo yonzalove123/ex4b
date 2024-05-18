@@ -43,8 +43,18 @@
               return "";
         }
 
+		function convertToCelsius(t, u) {
+              if(u == "F") {
+                return (t - 32) * (5/9);
+              } else if(u == "K") {
+                return t - 273.15;
+              } else if(u == "R") {
+                return t * (5/4);
+              }
+        }
+
         function convertTemperature() {
-              var t = $('#temp').val();//celsius
+              var t = parseFloat($('#temp').val());
               var u = $('#unit').val();
 
               var errorMsg = validateTemperature(t);
@@ -53,19 +63,8 @@
                 return;
               }
 
-              var t1;
-              var u1;
-
-              if(u == "F") {
-                t1 = t * (9/5) + 32;
-                u1 = "Fahrenheit";
-              } else if(u == "K") {
-                t1 =  parseFloat(t) + 273.15;
-                u1 = "Réaumur";
-              } else if(u == "R") {
-                t1 = t * (4/5);
-                u1 = "Kelvin";
-              }
+			  var t1 = convertToCelsius(t, u);
+              var u1 = "Celsius";
 
               alert("Temperature is " + t1 + " in " + u1);
         }
